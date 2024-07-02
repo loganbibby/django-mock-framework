@@ -1,0 +1,79 @@
+[tool.black]
+line-length = 120
+force-exclude = """
+/(
+  | migrations
+  | venv
+)/
+"""
+
+[tool.isort]
+profile = "black"
+atomic = true
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+ignore-magic = true
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 7
+exclude = [
+  "docs/",
+  "*/migrations/",
+  "urls.py",
+  "test_*.py",
+  "*/tests/",
+]
+ignore-regex = []
+verbose = 2
+quiet = false
+whitelist-regex = []
+color = true
+omit-covered-files = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.tests"
+python_files = ["tests.py", "test_*.py"]
+
+[tool.pylint.main]
+load-plugins = ["pylint_django"]
+django-settings-module = "tests.settings"
+max-module-lines = 5000
+disable = [
+  "import-error",
+  "wrong-import-order",
+  "line-too-long",
+  "missing-module-docstring",
+  "f-string-without-interpolation",
+  "trailing-whitespace",
+  "missing-final-newline",
+  "unused-argument",
+  "unused-variable",
+  "fixme",
+  "consider-using-dict-items",
+  "consider-iterating-dictionary",
+  "import-outside-toplevel",
+  "missing-function-docstring",
+  "missing-class-docstring",
+  "pointless-string-statement",
+]
+
+[tool.poetry]
+name = "django-mock-framework"
+version = "1.0.0"
+description = ""
+authors = ["Logan Bibby <logan@loganbibby.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.11"
+requests-mock = "^1.12.1"
+faker = "^26.0.0"
+phx-class-registry = "^4.1.0"
